@@ -29,11 +29,18 @@ pipeline{
                 echo "Running tests"
            }
        }
-         stage('Run app locally'){
+       stage('Run app locally'){
            steps{
                 sh 'nohup node index.js &'
            }
        }
+    stage('Deploy to Heroku'){
+      steps{
+              withCredentials([usernameColonPassword(credentialsId: '21f405c0-3c9b-4ae5-8370-4c610b17ced8', variable: 'HEROKU_CREDENTIALS')]) {
+                   sh 'git push https://${HEROKU_CREDENTIALS}@git.heroku.com/jenkins-demo-moringa.git main' }
+           }
+       }
+
 
 
     }
