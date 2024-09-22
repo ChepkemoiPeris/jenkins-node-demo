@@ -12,7 +12,7 @@ pipeline{
         stage("Clone repo"){
             steps{
                 git(
-                   url: "https://github.com/ChepkemoiPeris/jenkins-node-demo.git",
+                   url: "https://github.com/ChepkemoiPeris/gallery.git",
                    branch: "master"
                )
 
@@ -31,7 +31,7 @@ pipeline{
        }
        stage('Run app locally'){
            steps{
-                sh 'nohup node index.js &'
+                sh 'node server'
            }
        }
     stage('Deploy to Heroku'){
